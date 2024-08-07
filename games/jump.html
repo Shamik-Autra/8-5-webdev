@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D Parkour Game</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            display: block;
+            margin: 0 auto;
+        }
+        #difficultyMenu {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            font-size: 18px;
+            margin: 0 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+    <div id="difficultyMenu">
+        <button onclick="startGame('easy')">Easy</button>
+        <button onclick="startGame('medium')">Medium</button>
+        <button onclick="startGame('hard')">Hard</button>
+    </div>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const difficultyMenu = document.getElementById('difficultyMenu');
+
+        // Load images
+        const slipperImage = new Image();
+        slipperImage.src = 'slipper.png';
+        const faceImage = new Image();
+        faceImage.src = 'face.jpg';
+
+        // Game variables
+        let player = {
+            x: 50,
+            y: 200,
+            width: 40,
+            height: 60,
+            speed: 5,
+            jumping: false,
+            jumpPower: 15,
+            velocityY: 0
+        };
+
+        let slippers = [];
+        let lives = 3;
+        let score = 0;
+        let gameOver = false;
+        let showingMessage = false;
+        let gameRunning = false;
+        let difficulty = 'medium';
+
+        const difficultySettings = {
+            easy: { spawnRate: 0.01, speedMultiplier: 0.8 },
+            medium: { spawnRate: 0.02, speedMultiplier: 1 },
+            hard: { spawnRate: 0.03, speedMultiplier: 1.2 }
+        };
+
+        // Create slippers
+        function createSlipper() {
+            return {
+                x: canvas.width,
+                y: Math.random() < 0.7 ? canvas.height - 40 : Math.random() * (canvas.height - 60),
+                width: 40,
+                height: 20,
+                speed: (Math.random() * 3 + 2) * difficultySettings[difficulty].speedMultiplier
+            };
+        }
+
+        // Game loop
+        function gameLoop() {
+            if (gameRunning && !gameOver) {
+                update();
+                draw();
+                requestAnimationFrame(gameLoop);
+            }
+        }
+
+        // Update game state
+        function update() {
+            // Player movement
+            if (keys.ArrowLeft && player.x > 0) player.x -= player.speed;
+            if (keys.ArrowRight && player.x < canvas.width - player.width) player.x += player.speed;
+
+            // Jumping
+            if (keys.ArrowUp && !player.jumping) {
+                player.jumping = true;
+                player.velocityY = -player.jumpPower;
+            }
+
+            player.y += player.velocityY;
+            player.velocityY += 0.8; // Gravity
+
+            if (player.y > canvas.height - player.height) {
+                player.y = canvas.height - player.height;
+                player.jumping = false;
+                player.velocityY = 0;
+            }
+
+            // Update slippers
+            if (Math.random() < difficultySettings[difficulty].spawnRate) slippers.push(createSlipper());
+
+            slippers.forEach((slipper, index) => {
+                slipper.x -= slipper.speed;
+                if (slipper.x + slipper.width < 0) {
+                    slippers.splice(index, 1);
+                    score++;
+                }
+
+                // Collision detection
+                if (
+                    player.x < slipper.x + slipper.width &&
+                    player.x + player.width > slipper.x &&
+                    player.y < slipper.y + slipper.height &&
+                    player.y + player.height > slipper.y
+                ) {
+                    slippers.splice(index, 1);
+                    lives--;
+                    if (lives <= 0) {
+                        gameOver = true;
+                        gameRunning = false;
+                        difficultyMenu.style.display = 'block';
+                    } else {
+                        showMessage('EMOTIONAL DAMAGE');
+                    }
+                }
+            });
+        }
+
+        // Draw game objects
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw player
+            ctx.drawImage(faceImage, player.x, player.y, player.width, player.height);
+
+            // Draw slippers
+            slippers.forEach(slipper => {
+                ctx.drawImage(slipperImage, slipper.x, slipper.y, slipper.width, slipper.height);
+            });
+
+            // Draw score and lives
+            ctx.fillStyle = 'black';
+            ctx.font = '20px Arial';
+            ctx.fillText(`Score: ${score}`, 10, 30);
+            ctx.fillText(`Lives: ${lives}`, canvas.width - 100, 30);
+
+            if (gameOver) {
+                ctx.fillStyle = 'black';
+                ctx.font = '40px Arial';
+                ctx.fillText('Game Over', canvas.width / 2 - 100, canvas.height / 2);
+            }
+
+            if (showingMessage) {
+                ctx.fillStyle = 'red';
+                ctx.font = '30px Arial';
+                ctx.fillText('EMOTIONAL DAMAGE', canvas.width / 2 - 120, 100);
+            }
+        }
+
+        // Show message
+        function showMessage(message) {
+            showingMessage = true;
+            setTimeout(() => {
+                showingMessage = false;
+            }, 1000);
+        }
+
+        // Keyboard input
+        let keys = {};
+        document.addEventListener('keydown', (e) => {
+            keys[e.code] = true;
+        });
+        document.addEventListener('keyup', (e) => {
+            keys[e.code] = false;
+        });
+
+        // Start game
+        function startGame(selectedDifficulty) {
+            difficulty = selectedDifficulty;
+            gameRunning = true;
+            gameOver = false;
+            player.x = 50;
+            player.y = 200;
+            slippers = [];
+            lives = 3;
+            score = 0;
+            difficultyMenu.style.display = 'none';
+            gameLoop();
+        }
+
+        // Load images and show difficulty menu
+        let imagesLoaded = 0;
+        function imageLoaded() {
+            imagesLoaded++;
+            if (imagesLoaded === 2) {
+                difficultyMenu.style.display = 'block';
+            }
+        }
+        slipperImage.onload = imageLoaded;
+        faceImage.onload = imageLoaded;
+    </script>
+</body>
+</html>
