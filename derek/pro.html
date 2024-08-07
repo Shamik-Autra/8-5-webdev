@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Derek's Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .dark-mode {
+            background-color: #1a202c;
+            color: #cbd5e0;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-blue-900 text-red-600 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold">Derek's Portfolio</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="#biography" class="hover:underline">Biography</a></li>
+                    <li><a href="#hobbies" class="hover:underline">Hobbies</a></li>
+                    <li><a href="#projects" class="hover:underline">Projects</a></li>
+                    <li><a href="#contact" class="hover:underline">Contact</a></li>
+                </ul>
+            </nav>
+            <button id="dark-mode-toggle" class="bg-gray-800 text-white p-2 rounded">Toggle Dark Mode</button>
+        </div>
+    </header>
+
+    <!-- Biography Section -->
+    <section id="biography" class="container mx-auto p-8">
+        <h2 class="text-2xl font-bold mb-4">About Me</h2>
+        <div class="flex items-center">
+            <img src="profile.jpg" alt="Profile Picture" class="w-32 h-32 rounded-full mr-4">
+            <div>
+                <p class="text-lg mb-2">Name: Derek</p>
+                <p class="text-lg">I love playing basketball</p>
+                <button id="redirect-button" class="bg-gray-800 text-white p-2 rounded mt-4">Go to about:blank</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hobbies Section -->
+    <section id="hobbies" class="bg-blue-900 text-red-600 p-8">
+        <div class="container mx-auto">
+            <h2 class="text-2xl font-bold mb-4">Hobbies</h2>
+            <ul class="list-disc list-inside text-lg">
+                <li>Basketball</li>
+                <li>Tae Kwon Do</li>
+                <li>Coding</li>
+                <li>Art</li>
+                <li>Video Games</li>
+                <li>Track</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="container mx-auto p-8">
+        <h2 class="text-2xl font-bold mb-4">Projects</h2>
+        <p class="text-lg">Creating games</p>
+    </section>
+
+    <!-- To-Do List Section -->
+    <section id="todo-list" class="container mx-auto p-8">
+        <h2 class="text-2xl font-bold mb-4">To-Do List</h2>
+        <div class="space-y-4">
+            <input type="text" id="new-todo" class="w-full p-2 rounded" placeholder="Add a new to-do item">
+            <button id="add-todo" class="bg-gray-800 text-white p-2 rounded">Add</button>
+            <ul id="todos" class="list-disc list-inside text-lg"></ul>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-blue-900 text-red-600 p-8">
+        <div class="container mx-auto">
+            <h2 class="text-2xl font-bold mb-4">Contact Me</h2>
+            <form class="space-y-4">
+                <div>
+                    <label for="name" class="block text-lg">Name</label>
+                    <input type="text" id="name" class="w-full p-2 rounded" required>
+                </div>
+                <div>
+                    <label for="email" class="block text-lg">Email</label>
+                    <input type="email" id="email" class="w-full p-2 rounded" required>
+                </div>
+                <div>
+                    <label for="message" class="block text-lg">Message</label>
+                    <textarea id="message" class="w-full p-2 rounded" rows="4" required></textarea>
+                </div>
+                <div>
+                    <button type="submit" class="bg-gray-800 text-white p-2 rounded">Send</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center p-4">
+        <p>&copy; 2024 Derek's Portfolio. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const body = document.body;
+
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+            });
+
+            const addTodoButton = document.getElementById('add-todo');
+            const newTodoInput = document.getElementById('new-todo');
+            const todosList = document.getElementById('todos');
+
+            addTodoButton.addEventListener('click', () => {
+                const todoText = newTodoInput.value.trim();
+                if (todoText) {
+                    const li = document.createElement('li');
+                    li.textContent = todoText;
+                    li.classList.add('flex', 'justify-between', 'items-center', 'mb-2');
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = 'Remove';
+                    removeButton.classList.add('bg-red-600', 'text-white', 'p-1', 'rounded');
+                    removeButton.addEventListener('click', () => {
+                        todosList.removeChild(li);
+                    });
+                    li.appendChild(removeButton);
+                    todosList.appendChild(li);
+                    newTodoInput.value = '';
+                }
+            });
+
+            const redirectButton = document.getElementById('redirect-button');
+            redirectButton.addEventListener('click', () => {
+                window.location.href = 'about:blank';
+            });
+        });
+    </script>
+</body>
+</html>

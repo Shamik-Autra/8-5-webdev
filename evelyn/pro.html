@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evelyn's Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .bg-main {
+            background-color: #add8e6;
+            background-image: url('https://source.unsplash.com/random/1920x1080?kitten,sushi,white');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        .dark-mode {
+            background-color: #1a202c;
+            color: #f7fafc;
+        }
+        .dark-mode .bg-white {
+            background-color: #2d3748;
+        }
+        .dark-mode .text-gray-700 {
+            color: #e2e8f0;
+        }
+        .dark-mode .text-gray-800 {
+            color: #edf2f7;
+        }
+        .dark-mode .border-gray-300 {
+            border-color: #4a5568;
+        }
+        .dark-mode input, .dark-mode textarea {
+            background-color: #edf2f7;
+            color: #000000;
+            border-color: #4a5568;
+        }
+    </style>
+</head>
+
+<body class="bg-main text-gray-800">
+    <header class="bg-white shadow-md py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Evelyn's Portfolio</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="#about" class="text-blue-600 hover:underline">About</a></li>
+                    <li><a href="#hobbies" class="text-blue-600 hover:underline">Hobbies</a></li>
+                    <li><a href="#projects" class="text-blue-600 hover:underline">Projects</a></li>
+                    <li><a href="#contact" class="text-blue-600 hover:underline">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="flex items-center space-x-2">
+                <span class="text-gray-700">Dark Mode</span>
+                <button id="dark-mode-toggle" class="bg-blue-500 text-white px-4 py-2 rounded">Toggle</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-6">
+        <section id="about" class="my-8">
+            <h2 class="text-3xl font-bold mb-4">About Me</h2>
+            <div class="flex flex-col items-center">
+                <img src="profile.jpg" alt="Evelyn's Profile Picture" class="rounded-full w-32 h-32 mb-4">
+                <p class="mb-4"><strong>Name:</strong> Evelyn</p>
+                <p class="mb-4"><strong>About me:</strong> Love kittens, Hate spiders (fear of spiders too), and love sushi!</p>
+                <p class="mb-4"><strong>Favorite Foods:</strong> MANGOO!</p>
+            </div>
+        </section>
+
+        <section id="hobbies" class="my-8">
+            <h2 class="text-3xl font-bold mb-4">Hobbies</h2>
+            <p class="mb-4"><strong>Hobbies / Things I like to do for fun:</strong> Play on my iPad, draw, and hang out with my friends!</p>
+            <p class="mb-4"><strong>Sports/Activities I do outside of school:</strong> Dunno…</p>
+        </section>
+
+        <section id="projects" class="my-8">
+            <h2 class="text-3xl font-bold mb-4">Projects</h2>
+            <p class="mb-4"><strong>Projects (awesome things I have created):</strong> Art</p>
+            <div class="grid grid-cols-2 gap-6">
+                <div class="bg-white p-4 rounded shadow">
+                    <h3 class="text-2xl font-bold mb-2">Art Project 1</h3>
+                    <p>Details about the art project, materials used, inspiration, etc.</p>
+                </div>
+                <div class="bg-white p-4 rounded shadow">
+                    <h3 class="text-2xl font-bold mb-2">Art Project 2</h3>
+                    <p>Details about another art project.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="todo" class="my-8">
+            <h2 class="text-3xl font-bold mb-4">To-Do List</h2>
+            <div class="bg-white p-6 rounded shadow-md">
+                <form id="todo-form">
+                    <div class="mb-4">
+                        <label for="new-task" class="block text-gray-700">Add a new task</label>
+                        <input type="text" id="new-task" class="w-full border border-gray-300 p-2 rounded" required>
+                    </div>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add Task</button>
+                </form>
+                <ul id="task-list" class="mt-4 space-y-2"></ul>
+            </div>
+        </section>
+
+        <section id="contact" class="my-8">
+            <h2 class="text-3xl font-bold mb-4">Contact Me</h2>
+            <form action="#" method="post" class="bg-white p-6 rounded shadow-md">
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700">Name</label>
+                    <input type="text" id="name" name="name" class="w-full border border-gray-300 p-2 rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" class="w-full border border-gray-300 p-2 rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label for="message" class="block text-gray-700">Message</label>
+                    <textarea id="message" name="message" class="w-full border border-gray-300 p-2 rounded" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Send</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="bg-white shadow-md py-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Evelyn. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('dark-mode-toggle');
+            toggleButton.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+            });
+
+            const form = document.getElementById('todo-form');
+            const taskList = document.getElementById('task-list');
+
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const newTaskInput = document.getElementById('new-task');
+                const newTaskText = newTaskInput.value.trim();
+                if (newTaskText !== '') {
+                    addTask(newTaskText);
+                    newTaskInput.value = '';
+                }
+            });
+
+            function addTask(taskText) {
+                const listItem = document.createElement('li');
+                listItem.classList.add('flex', 'justify-between', 'items-center', 'bg-gray-200', 'p-2', 'rounded');
+
+                const taskSpan = document.createElement('span');
+                taskSpan.textContent = taskText;
+                listItem.appendChild(taskSpan);
+
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'Remove';
+                removeButton.classList.add('bg-red-500', 'text-white', 'px-2', 'py-1', 'rounded');
+                removeButton.addEventListener('click', () => {
+                    taskList.removeChild(listItem);
+                });
+
+                listItem.appendChild(removeButton);
+                taskList.appendChild(listItem);
+            }
+        });
+    </script>
+</body>
+
+</html>

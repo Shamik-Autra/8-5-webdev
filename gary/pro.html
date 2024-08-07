@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Gary's Professional Portfolio</title>
+    <style>
+        .dark-mode {
+            background-color: #1a202c;
+            color: #cbd5e0;
+        }
+        .dark-mode .bg-white {
+            background-color: #2d3748;
+        }
+        .dark-mode .text-gray-800 {
+            color: #cbd5e0;
+        }
+        .dark-mode .text-gray-600 {
+            color: #a0aec0;
+        }
+        .dark-mode .text-gray-700 {
+            color: #a0aec0;
+        }
+        .dark-mode input,
+        .dark-mode textarea {
+            background-color: #4a5568;
+            color: #cbd5e0;
+            border-color: #718096;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <div class="container mx-auto p-8">
+        <!-- Header -->
+        <header class="mb-12 flex justify-between items-center py-4">
+            <h1 class="text-4xl font-bold text-blue-600">Gary's Portfolio</h1>
+            <div class="flex items-center space-x-4">
+                <button id="dark-mode-toggle" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Toggle Dark Mode</button>
+                <button id="go-to-blank" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Go to about:blank</button>
+                <ul class="flex space-x-8 inline">
+                    <li><a href="#about" class="text-lg font-semibold text-gray-700 hover:text-blue-600">About</a></li>
+                    <li><a href="#hobbies" class="text-lg font-semibold text-gray-700 hover:text-blue-600">Hobbies</a></li>
+                    <li><a href="#projects" class="text-lg font-semibold text-gray-700 hover:text-blue-600">Projects</a></li>
+                    <li><a href="#contact" class="text-lg font-semibold text-gray-700 hover:text-blue-600">Contact</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <!-- About Section -->
+        <section id="about" class="mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-lg flex items-center">
+                <img src="profile.jpg" alt="Gary's Profile Picture" class="w-32 h-32 rounded-full mr-6">
+                <div>
+                    <h2 class="text-3xl font-semibold text-gray-800 mb-4">About Me</h2>
+                    <p class="text-lg text-gray-600">I am going to 3rd grade.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hobbies Section -->
+        <section id="hobbies" class="mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Hobbies / Things I Like to Do for Fun</h2>
+                <p class="text-lg text-gray-600">Pickle ball.</p>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Projects</h2>
+                <p class="text-lg text-gray-600">AI.</p>
+            </div>
+        </section>
+
+        <!-- To-Do List Section -->
+        <section id="todo" class="mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">To-Do List</h2>
+                <form id="todo-form" class="mb-4">
+                    <input type="text" id="todo-input" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Add a new task">
+                    <button type="submit" class="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Add</button>
+                </form>
+                <ul id="todo-list" class="list-disc pl-5"></ul>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section id="contact" class="mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Contact</h2>
+                <form class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-lg font-medium text-gray-700">Name</label>
+                        <input type="text" id="name" name="name" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-lg font-medium text-gray-700">Email</label>
+                        <input type="email" id="email" name="email" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-lg font-medium text-gray-700">Message</label>
+                        <textarea id="message" name="message" rows="4" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Send</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-12 text-center text-gray-600">
+            <p>&copy; 2024 Gary's Portfolio. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript for Toggle Dark Mode and To-Do List -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Toggle Dark Mode
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const body = document.body;
+
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+            });
+
+            // Go to about:blank
+            const goToBlankButton = document.getElementById('go-to-blank');
+            goToBlankButton.addEventListener('click', () => {
+                window.location.href = 'about:blank';
+            });
+
+            // To-Do List Functionality
+            const todoForm = document.getElementById('todo-form');
+            const todoInput = document.getElementById('todo-input');
+            const todoList = document.getElementById('todo-list');
+
+            todoForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const todoText = todoInput.value.trim();
+                if (todoText !== '') {
+                    const li = document.createElement('li');
+                    li.textContent = todoText;
+                    li.className = 'text-lg text-gray-600 flex justify-between items-center';
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = 'Remove';
+                    removeButton.className = 'ml-4 px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700';
+                    removeButton.addEventListener('click', () => {
+                        todoList.removeChild(li);
+                    });
+                    li.appendChild(removeButton);
+                    todoList.appendChild(li);
+                    todoInput.value = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

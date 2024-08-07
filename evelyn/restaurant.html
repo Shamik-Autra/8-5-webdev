@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chicken Taste</title>
+    <style>
+        /* Add your styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #fff;
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        header img {
+            height: 80px;
+        }
+        main {
+            padding: 20px;
+        }
+        .menu-item {
+            display: inline-block;
+            width: 200px;
+            margin: 10px;
+        }
+        .menu-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .menu-item button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .menu-item button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.jpg" alt="Chicken Taste Logo">
+        <h1>Welcome to Chicken Taste!</h1>
+    </header>
+    
+    <main>
+        <section>
+            <h2>Our Delicious Menu</h2>
+            <div class="menu-item">
+                <img src="chicken.jpg" alt="Chicken">
+                <p>Delicious Chicken</p>
+                <button onclick="addToOrder('Delicious Chicken')">Add to Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="Frenchies.jpg" alt="French Fries">
+                <p>Golden French Fries</p>
+                <button onclick="addToOrder('Golden French Fries')">Add to Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="hamburger.jpg" alt="Hamburger">
+                <p>Juicy Hamburger</p>
+                <button onclick="addToOrder('Juicy Hamburger')">Add to Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="hotdog.jpg" alt="Hot Dog">
+                <p>Tasty Hot Dog</p>
+                <button onclick="addToOrder('Tasty Hot Dog')">Add to Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="ice cream shake.jpg" alt="Ice Cream Shake">
+                <p>Refreshing Ice Cream Shake</p>
+                <button onclick="addToOrder('Refreshing Ice Cream Shake')">Add to Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="milkshake flate.jpg" alt="Milkshake">
+                <p>Creamy Milkshake</p>
+                <button onclick="addToOrder('Creamy Milkshake')">Add to Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="onion rings.jpg" alt="Onion Rings">
+                <p>Crispy Onion Rings</p>
+                <button onclick="addToOrder('Crispy Onion Rings')">Add to Order</button>
+            </div>
+            <!-- You can add more items here if needed -->
+        </section>
+    </main>
+    <script>
+        function addToOrder(itemName) {
+            alert(itemName + " added to your order!");
+            // You can add more functionality here, like updating the order list or sending data to the server
+        }
+    </script>
+</body>
+</html>
